@@ -5,20 +5,6 @@ function App() {
 	const [coord, setCoord] = useState('X: ??? | X: ???');
 	const [message, setMessage] = useState('... playing ...');
 
-	// function imageClick(e) {
-	// 	const rect = e.currentTarget.getBoundingClientRect();
-	// 	const xCoord = e.clientX - rect.left;
-	// 	const yCoord = e.clientY - rect.top;
-	// 	setCoord(
-	// 		`X: ${xCoord} | Y: ${yCoord} | absX ${e.screenX} | absY ${e.screenY}`
-	// 	);
-
-	// 	const dialog = document.querySelector('dialog');
-	// 	dialog.style.marginLeft = `${e.screenX}px`;
-	// 	dialog.style.marginTop = `${e.screenY}px`;
-	// 	dialog.show();
-	// }
-
 	function imageClick(e) {
 		const rect = e.currentTarget.getBoundingClientRect();
 		const xCoord = e.clientX - rect.left;
@@ -29,7 +15,16 @@ function App() {
 		detector.style.left = `${e.pageX - 40}px`;
 		detector.style.top = `${e.pageY - 40}px`;
 		detector.style.display = 'block';
+		setMessage('... playing');
 	}
+
+	async function fetchTest() {
+		const res = await fetch('http://localhost:3000/', { mode: 'cors' });
+		const data = await res.json();
+		console.log(data);
+	}
+
+	fetchTest();
 
 	return (
 		<>
@@ -62,7 +57,7 @@ function App() {
 							<button onClick={() => setMessage('checking if circle...')}>
 								circle
 							</button>
-							<button onClick={() => setMessage('checking if triangle...')}>
+							<button onClick={() => setMessage('checking if star...')}>
 								star
 							</button>
 						</div>
