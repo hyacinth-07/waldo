@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 
 function App() {
 	const [coord, setCoord] = useState('X: ??? | X: ???');
+	const [xCoord, setXCoord] = useState('');
+	const [yCoord, setYCoord] = useState('');
 	const [message, setMessage] = useState('... playing ...');
 	const [bgImage, setBgImage] = useState('');
-	const [circleCoord, setCirlceCoord] = useState('');
+	const [circleCoord, setCircleCoord] = useState('');
 	const [squareCoord, setSquareCoord] = useState('');
 	const [starCoord, setStarCoord] = useState('');
 
 	function imageClick(e) {
 		const rect = e.currentTarget.getBoundingClientRect();
-		const xCoord = e.clientX - rect.left;
-		const yCoord = e.clientY - rect.top;
+		setXCoord(e.clientX - rect.left);
+		setYCoord(e.clientY - rect.top);
 		setCoord(`X: ${xCoord} | Y: ${yCoord}`);
 
 		const detector = document.querySelector('#detector');
@@ -19,26 +21,43 @@ function App() {
 		detector.style.top = `${e.pageY - 40}px`;
 		detector.style.display = 'block';
 		setMessage('... playing');
-
-		console.log(circleCoord);
-		console.log(squareCoord);
-		console.log(starCoord);
 	}
 
 	async function fetchImage(url) {
-		const res = await fetch(url, {
-			mode: 'cors',
-		});
-		setBgImage(res.url);
+		try {
+			const res = await fetch(url, {
+				mode: 'cors',
+			});
+			setBgImage(res.url);
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	async function fetchData() {
 		const res = await fetch('http://localhost:3000/data.json');
 		const data = await res.json();
 
-		setCirlceCoord(data[0].circle_coord);
+		setCircleCoord(data[0].circle_coord);
 		setSquareCoord(data[0].square_coord);
 		setStarCoord(data[0].star_coord);
+	}
+
+	// GAME LOGIC
+
+	function checkCoordinates(x, y, shape) {
+		setMessage(`checking if ${shape.name}`);
+
+		if (
+			x >= shape.leftX &&
+			x <= shape.rightX &&
+			y >= shape.topY &&
+			y <= shape.bottomY
+		) {
+			console.log('Yes!');
+		} else {
+			console.log('No!');
+		}
 	}
 
 	// startup init
@@ -73,13 +92,19 @@ function App() {
 							</button>
 						</div>
 						<div className="flex flex-col w-20">
-							<button onClick={() => setMessage('checking if square...')}>
+							<button
+								onClick={() => checkCoordinates(xCoord, yCoord, squareCoord)}
+							>
 								square
 							</button>
-							<button onClick={() => setMessage('checking if circle...')}>
+							<button
+								onClick={() => checkCoordinates(xCoord, yCoord, circleCoord)}
+							>
 								circle
 							</button>
-							<button onClick={() => setMessage('checking if star...')}>
+							<button
+								onClick={() => checkCoordinates(xCoord, yCoord, starCoord)}
+							>
 								star
 							</button>
 						</div>
