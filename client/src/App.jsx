@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import DropdownButton from './components/buttons';
 
 function App() {
 	const [coord, setCoord] = useState('X: ??? | X: ???');
@@ -93,20 +94,14 @@ function App() {
 						</div>
 						<div className="flex flex-col w-20">
 							<button
-								onClick={() => checkCoordinates(xCoord, yCoord, squareCoord)}
-							>
-								square
-							</button>
-							<button
-								onClick={() => checkCoordinates(xCoord, yCoord, circleCoord)}
-							>
-								circle
-							</button>
-							<button
 								onClick={() => checkCoordinates(xCoord, yCoord, starCoord)}
 							>
 								star
 							</button>
+							<DropdownButton
+								name={squareCoord.name}
+								found={squareCoord.found}
+							/>
 						</div>
 					</div>
 				</div>

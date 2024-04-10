@@ -1,25 +1,28 @@
 [
 	{
 		"circle_coord": {
-			"shape": "circle",
+			"name": "circle",
 			"leftX": 207,
 			"rightX": 307,
 			"topY": 373,
-			"bottomY": 470
+			"bottomY": 470,
+			"found": false
 		},
 		"square_coord": {
-			"shape": "square",
+			"name": "square",
 			"leftX": 454,
 			"rightX": 547,
 			"topY": 187,
-			"bottomY": 275
+			"bottomY": 275,
+			"found": false
 		},
 		"star_coord": {
-			"shape": "star",
+			"name": "star",
 			"leftX": 493,
 			"rightX": 631,
 			"topY": 515,
-			"bottomY": 654
+			"bottomY": 654,
+			"found": false
 		}
 	}
 ]
