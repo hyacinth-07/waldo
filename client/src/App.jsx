@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import DropdownButton from './components/buttons';
 
 function App() {
 	const [coord, setCoord] = useState('X: ??? | X: ???');
@@ -21,7 +20,7 @@ function App() {
 		detector.style.left = `${e.pageX - 40}px`;
 		detector.style.top = `${e.pageY - 40}px`;
 		detector.style.display = 'block';
-		setMessage('... playing');
+		setMessage('... playing ...');
 	}
 
 	async function fetchImage(url) {
@@ -44,20 +43,78 @@ function App() {
 		setStarCoord(data[0].star_coord);
 	}
 
-	// GAME LOGIC
+	// GAME RESET
+
+	function gameReset() {
+		fetchData();
+
+		const image = document.querySelector('img');
+		image.style.pointerEvents = 'auto';
+
+		const detector = document.querySelector('#detector');
+		detector.style.display = 'none';
+
+		setMessage('game restart!');
+		setTimeout(() => {
+			setMessage('... playing ...');
+		}, 1000);
+	}
+
+	// CHECK COORDINATES
 
 	function checkCoordinates(x, y, shape) {
-		setMessage(`checking if ${shape.name}`);
-
 		if (
 			x >= shape.leftX &&
 			x <= shape.rightX &&
 			y >= shape.topY &&
 			y <= shape.bottomY
 		) {
-			console.log('Yes!');
+			shape.found = true;
+			setMessage('YES!');
+			setTimeout(() => {
+				setMessage('... playing ...');
+			}, 1000);
 		} else {
-			console.log('No!');
+			setMessage('NO!');
+			setTimeout(() => {
+				setMessage('... playing ...');
+			}, 1000);
+		}
+
+		gameState();
+	}
+
+	// CHECK GAMESTATE
+
+	function gameState() {
+		if (!circleCoord.found == true) return;
+		if (!squareCoord.found == true) return;
+		if (!starCoord.found == true) return;
+
+		const detector = document.querySelector('#detector');
+		detector.style.display = 'none';
+
+		const image = document.querySelector('img');
+		image.style.pointerEvents = 'none';
+
+		setMessage('congrats, game won');
+	}
+
+	// UI
+
+	function DropdownButton({ name, found, shape }) {
+		if (found === false) {
+			return (
+				<button onClick={() => checkCoordinates(xCoord, yCoord, shape)}>
+					{name}
+				</button>
+			);
+		} else {
+			return (
+				<button className="line-through" disabled>
+					{name}
+				</button>
+			);
 		}
 	}
 
@@ -93,14 +150,20 @@ function App() {
 							</button>
 						</div>
 						<div className="flex flex-col w-20">
-							<button
-								onClick={() => checkCoordinates(xCoord, yCoord, starCoord)}
-							>
-								star
-							</button>
 							<DropdownButton
 								name={squareCoord.name}
 								found={squareCoord.found}
+								shape={squareCoord}
+							/>
+							<DropdownButton
+								name={circleCoord.name}
+								found={circleCoord.found}
+								shape={circleCoord}
+							/>
+							<DropdownButton
+								name={starCoord.name}
+								found={starCoord.found}
+								shape={starCoord}
 							/>
 						</div>
 					</div>
@@ -109,20 +172,7 @@ function App() {
 				<p>{coord}</p>
 				<p>{message}</p>
 				<div className="*:mx-2">
-					<button
-						onClick={() =>
-							fetchImage('http://localhost:3000/images/test_waldo_alt.png')
-						}
-					>
-						Get Alt Image
-					</button>
-					<button
-						onClick={() =>
-							fetchImage('http://localhost:3000/images/test_waldo.png')
-						}
-					>
-						Get OG Image
-					</button>
+					<button onClick={() => gameReset()}>Game Reset</button>
 				</div>
 			</div>
 		</>
