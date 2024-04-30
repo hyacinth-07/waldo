@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Timer from './components/Timer';
 import DropdownButton from './components/DropdownButton';
+import fetchData from './utils/fetchData';
+import gameReset from './utils/gameReset';
 
 function App() {
 	const [uiCoord, setUiCoord] = useState('X: ??? | X: ???');
@@ -38,37 +40,11 @@ function App() {
 		}
 	}
 
-	async function fetchData() {
-		const res = await fetch('http://localhost:3000/data.json');
-		const data = await res.json();
-
-		setCircleCoord(data[0].circle_coord);
-		setSquareCoord(data[0].square_coord);
-		setStarCoord(data[0].star_coord);
-	}
-
-	// GAME RESET
-
-	function gameReset() {
-		fetchData();
-
-		const image = document.querySelector('img');
-		image.style.pointerEvents = 'auto';
-
-		const detector = document.querySelector('#detector');
-		detector.style.display = 'none';
-
-		setMessage('game restart!');
-		setTimeout(() => {
-			setMessage('... playing ...');
-		}, 1000);
-	}
-
 	// startup init
 
 	useEffect(() => {
 		fetchImage('http://localhost:3000/images/test_waldo.png');
-		fetchData();
+		fetchData({ setCircleCoord, setSquareCoord, setStarCoord });
 	}, []);
 
 	return (
@@ -136,7 +112,18 @@ function App() {
 					<p>{uiCoord}</p>
 					<p>{message}</p>
 					<div className="*:mx-2">
-						<button onClick={() => gameReset()}>Game Reset</button>
+						<button
+							onClick={() =>
+								gameReset({
+									setCircleCoord,
+									setSquareCoord,
+									setStarCoord,
+									setMessage,
+								})
+							}
+						>
+							Game Reset
+						</button>
 					</div>
 				</div>
 			</div>
