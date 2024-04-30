@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Timer from './components/Timer';
+import DropdownButton from './components/DropdownButton';
 
 function App() {
-	const [coord, setCoord] = useState('X: ??? | X: ???');
-	const [xCoord, setXCoord] = useState('');
-	const [yCoord, setYCoord] = useState('');
+	const [uiCoord, setUiCoord] = useState('X: ??? | X: ???');
+	const [coords, setCoords] = useState({ xCoord: '', yCoord: '' });
 	const [message, setMessage] = useState('... playing ...');
 	const [bgImage, setBgImage] = useState('');
 	const [circleCoord, setCircleCoord] = useState('');
@@ -13,9 +13,12 @@ function App() {
 
 	function imageClick(e) {
 		const rect = e.currentTarget.getBoundingClientRect();
-		setXCoord(e.clientX - rect.left);
-		setYCoord(e.clientY - rect.top);
-		setCoord(`X: ${xCoord} | Y: ${yCoord}`);
+		setCoords({
+			...coords,
+			xCoord: e.clientX - rect.left,
+			yCoord: e.clientY - rect.top,
+		});
+		setUiCoord(`X: ${coords.xCoord} | Y: ${coords.yCoord}`);
 
 		const detector = document.querySelector('#detector');
 		detector.style.left = `${e.pageX - 40}px`;
@@ -61,64 +64,6 @@ function App() {
 		}, 1000);
 	}
 
-	// CHECK COORDINATES
-
-	function checkCoordinates(x, y, shape) {
-		if (
-			x >= shape.leftX &&
-			x <= shape.rightX &&
-			y >= shape.topY &&
-			y <= shape.bottomY
-		) {
-			shape.found = true;
-			setMessage('YES!');
-			setTimeout(() => {
-				setMessage('... playing ...');
-			}, 1000);
-		} else {
-			setMessage('NO!');
-			setTimeout(() => {
-				setMessage('... playing ...');
-			}, 1000);
-		}
-
-		gameState();
-	}
-
-	// CHECK GAMESTATE
-
-	function gameState() {
-		if (!circleCoord.found == true) return;
-		if (!squareCoord.found == true) return;
-		if (!starCoord.found == true) return;
-
-		const detector = document.querySelector('#detector');
-		detector.style.display = 'none';
-
-		const image = document.querySelector('img');
-		image.style.pointerEvents = 'none';
-
-		setMessage('congrats, game won');
-	}
-
-	// UI
-
-	function DropdownButton({ name, found, shape }) {
-		if (found === false) {
-			return (
-				<button onClick={() => checkCoordinates(xCoord, yCoord, shape)}>
-					{name}
-				</button>
-			);
-		} else {
-			return (
-				<button className="line-through" disabled>
-					{name}
-				</button>
-			);
-		}
-	}
-
 	// startup init
 
 	useEffect(() => {
@@ -151,28 +96,44 @@ function App() {
 								X
 							</button>
 						</div>
+
 						<div className="flex flex-col w-20">
 							<DropdownButton
 								name={squareCoord.name}
 								found={squareCoord.found}
 								shape={squareCoord}
+								mouseCoords={coords}
+								setMessage={setMessage}
+								circle={circleCoord}
+								square={squareCoord}
+								star={starCoord}
 							/>
 							<DropdownButton
 								name={circleCoord.name}
 								found={circleCoord.found}
 								shape={circleCoord}
+								mouseCoords={coords}
+								setMessage={setMessage}
+								circle={circleCoord}
+								square={squareCoord}
+								star={starCoord}
 							/>
 							<DropdownButton
 								name={starCoord.name}
 								found={starCoord.found}
 								shape={starCoord}
+								mouseCoords={coords}
+								setMessage={setMessage}
+								circle={circleCoord}
+								square={squareCoord}
+								star={starCoord}
 							/>
 						</div>
 					</div>
 				</div>
 
 				<div className="flex justify-around w-[500px]">
-					<p>{coord}</p>
+					<p>{uiCoord}</p>
 					<p>{message}</p>
 					<div className="*:mx-2">
 						<button onClick={() => gameReset()}>Game Reset</button>
