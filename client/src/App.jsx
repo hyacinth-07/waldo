@@ -3,6 +3,7 @@ import Timer from './components/Timer';
 import DropdownButton from './components/DropdownButton';
 import fetchData from './utils/fetchData';
 import gameReset from './utils/gameReset';
+import imageClick from './utils/imageClick';
 
 function App() {
 	const [uiCoord, setUiCoord] = useState('X: ??? | X: ???');
@@ -12,22 +13,6 @@ function App() {
 	const [circleCoord, setCircleCoord] = useState('');
 	const [squareCoord, setSquareCoord] = useState('');
 	const [starCoord, setStarCoord] = useState('');
-
-	function imageClick(e) {
-		const rect = e.currentTarget.getBoundingClientRect();
-		setCoords({
-			...coords,
-			xCoord: e.clientX - rect.left,
-			yCoord: e.clientY - rect.top,
-		});
-		setUiCoord(`X: ${coords.xCoord} | Y: ${coords.yCoord}`);
-
-		const detector = document.querySelector('#detector');
-		detector.style.left = `${e.pageX - 40}px`;
-		detector.style.top = `${e.pageY - 40}px`;
-		detector.style.display = 'block';
-		setMessage('... playing ...');
-	}
 
 	async function fetchImage(url) {
 		try {
@@ -56,7 +41,9 @@ function App() {
 						src={bgImage}
 						alt="the testing image"
 						className="w-fit h-fit min-w-fit min-h-fit"
-						onClick={imageClick}
+						onClick={(e) =>
+							imageClick({ e, coords, setCoords, setUiCoord, setMessage })
+						}
 					/>
 					<div id="detector" className="hidden absolute">
 						<div className="flex">
