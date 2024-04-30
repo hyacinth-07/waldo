@@ -4,6 +4,7 @@ import DropdownButton from './components/DropdownButton';
 import fetchData from './utils/fetchData';
 import gameReset from './utils/gameReset';
 import imageClick from './utils/imageClick';
+import fetchImage from './utils/fetchImage';
 
 function App() {
 	const [uiCoord, setUiCoord] = useState('X: ??? | X: ???');
@@ -14,21 +15,10 @@ function App() {
 	const [squareCoord, setSquareCoord] = useState('');
 	const [starCoord, setStarCoord] = useState('');
 
-	async function fetchImage(url) {
-		try {
-			const res = await fetch(url, {
-				mode: 'cors',
-			});
-			setBgImage(res.url);
-		} catch (err) {
-			console.log(err);
-		}
-	}
-
-	// startup init
+	// INIT
 
 	useEffect(() => {
-		fetchImage('http://localhost:3000/images/test_waldo.png');
+		fetchImage('http://localhost:3000/images/test_waldo.png', setBgImage);
 		fetchData({ setCircleCoord, setSquareCoord, setStarCoord });
 	}, []);
 
