@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Timer from '../components/Timer';
-import { startTimer, stopTimer, resetTimer } from './utils/timerFunctions';
+import { startTimer, stopTimer, resetTimer } from '../utils/timerFunctions';
 import DropdownButton from '../components/DropdownButton';
 import imageClick from '../utils/imageClick';
 import fetchData from '../utils/fetchData';
@@ -28,7 +28,7 @@ export default function GameBoard() {
 	// INIT
 
 	useEffect(() => {
-		fetchImage('http://localhost:3000/images/test_waldo.png', setBgImage);
+		fetchImage('http://localhost:3000/images/test_waldo_3.png', setBgImage);
 		fetchData({ setCircleCoord, setSquareCoord, setStarCoord });
 	}, []);
 

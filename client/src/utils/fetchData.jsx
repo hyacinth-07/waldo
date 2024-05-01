@@ -6,7 +6,7 @@ export default async function fetchData({
 	const res = await fetch('http://localhost:3000/data.json');
 	const data = await res.json();
 
-	setCircleCoord(data[0].circle_coord);
-	setSquareCoord(data[0].square_coord);
-	setStarCoord(data[0].star_coord);
+	setCircleCoord(data[2].circle_coord);
+	setSquareCoord(data[2].square_coord);
+	setStarCoord(data[2].star_coord);
 }

@@ -24,5 +24,57 @@
 			"bottomY": 654,
 			"found": false
 		}
+	},
+	{
+		"circle_coord": {
+			"name": "circle",
+			"leftX": 94,
+			"rightX": 233,
+			"topY": 677,
+			"bottomY": 793,
+			"found": false
+		},
+		"square_coord": {
+			"name": "square",
+			"leftX": 243,
+			"rightX": 363,
+			"topY": 271,
+			"bottomY": 334,
+			"found": false
+		},
+		"star_coord": {
+			"name": "star",
+			"leftX": 528,
+			"rightX": 705,
+			"topY": 455,
+			"bottomY": 586,
+			"found": false
+		}
+	},
+	{
+		"circle_coord": {
+			"name": "circle",
+			"leftX": 560,
+			"rightX": 676,
+			"topY": 171,
+			"bottomY": 282,
+			"found": false
+		},
+		"square_coord": {
+			"name": "square",
+			"leftX": 380,
+			"rightX": 512,
+			"topY": 695,
+			"bottomY": 770,
+			"found": false
+		},
+		"star_coord": {
+			"name": "star",
+			"leftX": 187,
+			"rightX": 322,
+			"topY": 400,
+			"bottomY": 535,
+			"found": false
+		}
 	}
 ]
