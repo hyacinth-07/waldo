@@ -9,12 +9,21 @@ export default function DropdownButton({
 	circle,
 	square,
 	star,
+	setIsRunning,
 }) {
 	if (found === false) {
 		return (
 			<button
 				onClick={() =>
-					checkCoordinates(mouseCoords, shape, setMessage, circle, square, star)
+					checkCoordinates(
+						mouseCoords,
+						shape,
+						setMessage,
+						circle,
+						square,
+						star,
+						setIsRunning
+					)
 				}
 			>
 				{name}

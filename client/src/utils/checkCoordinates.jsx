@@ -1,4 +1,6 @@
-function gameState(circle, square, star, setMessage) {
+import { stopTimer } from './timerFunctions';
+
+function gameState(circle, square, star, setMessage, setIsRunning) {
 	if (!circle.found == true) return;
 	if (!square.found == true) return;
 	if (!star.found == true) return;
@@ -9,6 +11,7 @@ function gameState(circle, square, star, setMessage) {
 	const image = document.querySelector('img');
 	image.style.pointerEvents = 'none';
 
+	stopTimer({ setIsRunning });
 	setMessage('congrats, game won');
 }
 
@@ -18,7 +21,8 @@ export default function checkCoordinates(
 	setMessage,
 	circle,
 	square,
-	star
+	star,
+	setIsRunning
 ) {
 	const x = mouseCoords.xCoord;
 	const y = mouseCoords.yCoord;
@@ -40,6 +44,5 @@ export default function checkCoordinates(
 			setMessage('... playing ...');
 		}, 1000);
 	}
-
-	gameState(circle, square, star, setMessage);
+	gameState(circle, square, star, setMessage, setIsRunning);
 }

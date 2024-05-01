@@ -86,6 +86,7 @@ function App() {
 								circle={circleCoord}
 								square={squareCoord}
 								star={starCoord}
+								setIsRunning={setIsRunning}
 							/>
 							<DropdownButton
 								name={circleCoord.name}
@@ -96,6 +97,7 @@ function App() {
 								circle={circleCoord}
 								square={squareCoord}
 								star={starCoord}
+								setIsRunning={setIsRunning}
 							/>
 							<DropdownButton
 								name={starCoord.name}
@@ -106,6 +108,7 @@ function App() {
 								circle={circleCoord}
 								square={squareCoord}
 								star={starCoord}
+								setIsRunning={setIsRunning}
 							/>
 						</div>
 					</div>
