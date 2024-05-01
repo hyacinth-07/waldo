@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
-export default function Timer() {
-	const [isRunning, setIsRunning] = useState(false);
-	const [elapsedTime, setElapsedTime] = useState(0);
-	const intervalRef = useRef(null);
-	const startTimeRef = useRef(0);
-
+export default function Timer({
+	isRunning,
+	elapsedTime,
+	setElapsedTime,
+	intervalRef,
+	startTimeRef,
+}) {
 	useEffect(() => {
 		if (isRunning) {
 			intervalRef.current = setInterval(() => {
@@ -17,20 +18,6 @@ export default function Timer() {
 			clearInterval(intervalRef.current);
 		};
 	}, [isRunning]);
-
-	function start() {
-		setIsRunning(true);
-		startTimeRef.current = Date.now() - elapsedTime;
-	}
-
-	function stop() {
-		setIsRunning(false);
-	}
-
-	function reset() {
-		setElapsedTime(0);
-		setIsRunning(false);
-	}
 
 	function format() {
 		let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
@@ -48,11 +35,6 @@ export default function Timer() {
 		<>
 			<div>
 				<div>{format()}</div>
-				<div>
-					<button onClick={start}>Start</button>
-					<button onClick={stop}>Stop</button>
-					<button onClick={reset}>Reset</button>
-				</div>
 			</div>
 		</>
 	);

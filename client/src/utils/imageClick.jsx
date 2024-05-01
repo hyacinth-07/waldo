@@ -4,6 +4,10 @@ export default function imageClick({
 	setCoords,
 	setUiCoord,
 	setMessage,
+	startTimer,
+	setIsRunning,
+	startTimeRef,
+	elapsedTime,
 }) {
 	const rect = e.currentTarget.getBoundingClientRect();
 	setCoords({
@@ -17,5 +21,6 @@ export default function imageClick({
 	detector.style.left = `${e.pageX - 40}px`;
 	detector.style.top = `${e.pageY - 40}px`;
 	detector.style.display = 'block';
+	startTimer({ setIsRunning, startTimeRef, elapsedTime });
 	setMessage('... playing ...');
 }

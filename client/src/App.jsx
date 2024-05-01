@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Timer from './components/Timer';
+import { startTimer, stopTimer, resetTimer } from './utils/timerFunctions';
 import DropdownButton from './components/DropdownButton';
-import fetchData from './utils/fetchData';
-import gameReset from './utils/gameReset';
 import imageClick from './utils/imageClick';
+import fetchData from './utils/fetchData';
 import fetchImage from './utils/fetchImage';
+import gameReset from './utils/gameReset';
 
 function App() {
+	// game / ui state
+
 	const [uiCoord, setUiCoord] = useState('X: ??? | X: ???');
 	const [coords, setCoords] = useState({ xCoord: '', yCoord: '' });
 	const [message, setMessage] = useState('... playing ...');
@@ -14,6 +17,13 @@ function App() {
 	const [circleCoord, setCircleCoord] = useState('');
 	const [squareCoord, setSquareCoord] = useState('');
 	const [starCoord, setStarCoord] = useState('');
+
+	// timer state
+
+	const [isRunning, setIsRunning] = useState(false);
+	const [elapsedTime, setElapsedTime] = useState(0);
+	const intervalRef = useRef(null);
+	const startTimeRef = useRef(0);
 
 	// INIT
 
@@ -26,13 +36,29 @@ function App() {
 		<>
 			<div className="h-screen w-screen bg-slate-400 flex flex-col justify-center items-center">
 				<div>
-					<Timer />
+					<Timer
+						isRunning={isRunning}
+						elapsedTime={elapsedTime}
+						setElapsedTime={setElapsedTime}
+						intervalRef={intervalRef}
+						startTimeRef={startTimeRef}
+					/>
 					<img
 						src={bgImage}
 						alt="the testing image"
 						className="w-fit h-fit min-w-fit min-h-fit"
 						onClick={(e) =>
-							imageClick({ e, coords, setCoords, setUiCoord, setMessage })
+							imageClick({
+								e,
+								coords,
+								setCoords,
+								setUiCoord,
+								setMessage,
+								startTimer,
+								setIsRunning,
+								startTimeRef,
+								elapsedTime,
+							})
 						}
 					/>
 					<div id="detector" className="hidden absolute">
@@ -96,11 +122,15 @@ function App() {
 									setSquareCoord,
 									setStarCoord,
 									setMessage,
+									resetTimer,
+									setElapsedTime,
+									setIsRunning,
 								})
 							}
 						>
 							Game Reset
 						</button>
+						<button onClick={() => stopTimer({ setIsRunning })}>stop</button>
 					</div>
 				</div>
 			</div>
