@@ -34,7 +34,7 @@ export default function GameBoard() {
 
 	return (
 		<>
-			<div className="h-screen w-screen bg-slate-400 flex flex-col justify-center items-center">
+			<div className="flex flex-col justify-center items-center w-full h-full">
 				<div>
 					<Timer
 						isRunning={isRunning}

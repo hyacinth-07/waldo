@@ -1,7 +1,13 @@
-import GameBoard from './components/GameBoard';
+import SelectionScreen from './components/SelectionScreen';
 
 function App() {
-	return <GameBoard />;
+	return (
+		<>
+			<div className="h-screen w-screen bg-slate-400">
+				<SelectionScreen />
+			</div>
+		</>
+	);
 }
 
 export default App;
