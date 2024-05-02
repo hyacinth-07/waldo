@@ -4,6 +4,7 @@ export default function SelectionTile({ imageUrl }) {
 			<img
 				className="border border-black border-solid w-80 h-80"
 				src={imageUrl}
+				onClick={() => console.log(imageUrl)}
 			></img>
 		</>
 	);
