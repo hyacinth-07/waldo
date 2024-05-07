@@ -1,5 +1,6 @@
 // UTILS
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import loadData from './utils/loadData';
 // ROUTES
 import Root from './routes/Root';
 import ErrorPage from './routes/ErrorPage';
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: <Root />,
 		errorElement: <ErrorPage />,
+		loader: loadData,
 		children: [
 			{
 				index: true,
@@ -25,14 +27,17 @@ const router = createBrowserRouter([
 			{
 				path: 'game/gameOne',
 				element: <GameBoard url={image1} index={0} />,
+				loader: loadData,
 			},
 			{
 				path: 'game/gameTwo',
 				element: <GameBoard url={image2} index={1} />,
+				loader: loadData,
 			},
 			{
 				path: 'game/gameThree',
 				element: <GameBoard url={image3} index={2} />,
+				loader: loadData,
 			},
 		],
 	},

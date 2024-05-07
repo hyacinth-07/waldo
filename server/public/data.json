@@ -23,7 +23,8 @@
 			"topY": 515,
 			"bottomY": 654,
 			"found": false
-		}
+		},
+		"time": { "Johnny": 45, "Antonio": 33 }
 	},
 	{
 		"circle_coord": {
@@ -49,7 +50,8 @@
 			"topY": 455,
 			"bottomY": 586,
 			"found": false
-		}
+		},
+		"time": {}
 	},
 	{
 		"circle_coord": {
@@ -75,6 +77,7 @@
 			"topY": 400,
 			"bottomY": 535,
 			"found": false
-		}
+		},
+		"time": {}
 	}
 ]

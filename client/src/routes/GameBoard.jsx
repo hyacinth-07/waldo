@@ -3,9 +3,9 @@ import Timer from '../components/Timer';
 import { startTimer, stopTimer, resetTimer } from '../utils/timerFunctions';
 import DropdownButton from '../components/DropdownButton';
 import imageClick from '../utils/imageClick';
-import fetchData from '../utils/fetchData';
 import fetchImage from '../utils/fetchImage';
 import gameReset from '../utils/gameReset';
+import { useLoaderData } from 'react-router-dom';
 
 // game / ui state
 
@@ -19,6 +19,7 @@ export default function GameBoard({ url, index }) {
 	const [starCoord, setStarCoord] = useState('');
 
 	const x = url;
+	const data = useLoaderData();
 
 	// timer state
 
@@ -31,8 +32,10 @@ export default function GameBoard({ url, index }) {
 
 	useEffect(() => {
 		fetchImage(x, setBgImage);
-		fetchData({ setCircleCoord, setSquareCoord, setStarCoord, index });
-	}, [x]);
+		setCircleCoord(data.data[index].circle_coord);
+		setSquareCoord(data.data[index].square_coord);
+		setStarCoord(data.data[index].star_coord);
+	}, []);
 
 	return (
 		<>
