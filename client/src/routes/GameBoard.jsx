@@ -9,7 +9,7 @@ import gameReset from '../utils/gameReset';
 
 // game / ui state
 
-export default function GameBoard() {
+export default function GameBoard({ url }) {
 	const [uiCoord, setUiCoord] = useState('X: ??? | X: ???');
 	const [coords, setCoords] = useState({ xCoord: '', yCoord: '' });
 	const [message, setMessage] = useState('... playing ...');
@@ -17,6 +17,8 @@ export default function GameBoard() {
 	const [circleCoord, setCircleCoord] = useState('');
 	const [squareCoord, setSquareCoord] = useState('');
 	const [starCoord, setStarCoord] = useState('');
+
+	const x = url;
 
 	// timer state
 
@@ -28,9 +30,9 @@ export default function GameBoard() {
 	// INIT
 
 	useEffect(() => {
-		fetchImage('http://localhost:3000/images/test_waldo_3.png', setBgImage);
+		fetchImage(x, setBgImage);
 		fetchData({ setCircleCoord, setSquareCoord, setStarCoord });
-	}, []);
+	}, [x]);
 
 	return (
 		<>

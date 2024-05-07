@@ -1,11 +1,14 @@
-export default function SelectionTile({ imageUrl }) {
+import { Link } from 'react-router-dom';
+
+export default function SelectionTile({ imageUrl, location }) {
 	return (
 		<>
-			<img
-				className="border border-black border-solid w-80 h-80"
-				src={imageUrl}
-				onClick={() => console.log(imageUrl)}
-			></img>
+			<Link to={location}>
+				<img
+					className="border border-black border-solid w-80 h-80"
+					src={imageUrl}
+				></img>
+			</Link>
 		</>
 	);
 }
