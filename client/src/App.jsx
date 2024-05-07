@@ -24,15 +24,15 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'game/gameOne',
-				element: <GameBoard url={image1} />,
+				element: <GameBoard url={image1} index={0} />,
 			},
 			{
 				path: 'game/gameTwo',
-				element: <GameBoard url={image2} />,
+				element: <GameBoard url={image2} index={1} />,
 			},
 			{
 				path: 'game/gameThree',
-				element: <GameBoard url={image3} />,
+				element: <GameBoard url={image3} index={2} />,
 			},
 		],
 	},

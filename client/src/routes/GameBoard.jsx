@@ -9,7 +9,7 @@ import gameReset from '../utils/gameReset';
 
 // game / ui state
 
-export default function GameBoard({ url }) {
+export default function GameBoard({ url, index }) {
 	const [uiCoord, setUiCoord] = useState('X: ??? | X: ???');
 	const [coords, setCoords] = useState({ xCoord: '', yCoord: '' });
 	const [message, setMessage] = useState('... playing ...');
@@ -31,7 +31,7 @@ export default function GameBoard({ url }) {
 
 	useEffect(() => {
 		fetchImage(x, setBgImage);
-		fetchData({ setCircleCoord, setSquareCoord, setStarCoord });
+		fetchData({ setCircleCoord, setSquareCoord, setStarCoord, index });
 	}, [x]);
 
 	return (
