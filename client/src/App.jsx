@@ -2,6 +2,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // ROUTES
 import Root from './routes/Root';
+import ErrorPage from './routes/ErrorPage';
 import SelectionScreen from './routes/SelectionScreen';
 import GameBoard from './routes/GameBoard';
 // IMAGES
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Root />,
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				index: true,
