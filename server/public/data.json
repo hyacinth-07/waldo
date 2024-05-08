@@ -24,7 +24,11 @@
 			"bottomY": 654,
 			"found": false
 		},
-		"time": { "Johnny": 45, "Antonio": 33 }
+		"time": [
+			{ "name": "Johnny", "score": 45 },
+			{ "name": "Franco", "score": 22 },
+			{ "name": "Antonio", "score": 73 }
+		]
 	},
 	{
 		"circle_coord": {
@@ -51,7 +55,7 @@
 			"bottomY": 586,
 			"found": false
 		},
-		"time": {}
+		"time": []
 	},
 	{
 		"circle_coord": {
@@ -78,6 +82,6 @@
 			"bottomY": 535,
 			"found": false
 		},
-		"time": {}
+		"time": []
 	}
 ]
