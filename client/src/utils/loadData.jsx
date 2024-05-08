@@ -1,6 +1,12 @@
 export default async function loadData() {
-	const res = await fetch('http://localhost:3000/data.json');
-	const data = await res.json();
+	let data;
+
+	try {
+		const res = await fetch('http://localhost:3000/data.json');
+		data = await res.json();
+	} catch (error) {
+		console.log(error);
+	}
 
 	return { data };
 }

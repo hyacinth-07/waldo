@@ -1,6 +1,7 @@
-import fetchData from './fetchData';
-
 export default function gameReset({
+	circleCoord,
+	squareCoord,
+	starCoord,
 	setCircleCoord,
 	setSquareCoord,
 	setStarCoord,
@@ -9,7 +10,9 @@ export default function gameReset({
 	setElapsedTime,
 	setIsRunning,
 }) {
-	fetchData({ setCircleCoord, setSquareCoord, setStarCoord });
+	setCircleCoord({ ...circleCoord, found: false });
+	setSquareCoord({ ...squareCoord, found: false });
+	setStarCoord({ ...starCoord, found: false });
 
 	const image = document.querySelector('img');
 	image.style.pointerEvents = 'auto';
