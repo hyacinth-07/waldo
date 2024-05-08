@@ -1,6 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import Timer from '../components/Timer';
-import { startTimer, stopTimer, resetTimer } from '../utils/timerFunctions';
+import {
+	startTimer,
+	stopTimer,
+	resetTimer,
+	formatTimer,
+} from '../utils/timerFunctions';
 import DropdownButton from '../components/DropdownButton';
 import imageClick from '../utils/imageClick';
 import gameReset from '../utils/gameReset';
@@ -140,6 +145,7 @@ export default function GameBoard({ url, index }) {
 							Game Reset
 						</button>
 						<button onClick={() => stopTimer({ setIsRunning })}>stop</button>
+						<button onClick={() => formatTimer({ elapsedTime })}>time?</button>
 					</div>
 				</div>
 			</div>
