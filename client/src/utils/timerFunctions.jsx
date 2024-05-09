@@ -21,8 +21,6 @@ function formatTimer({ elapsedTime }) {
 	seconds = String(seconds).padStart(2, '0');
 	milliSeconds = String(milliSeconds).padStart(2, '0');
 
-	console.log(minutes, seconds, milliSeconds, elapsedTime);
-
 	return { minutes, seconds, milliSeconds, elapsedTime };
 }
 

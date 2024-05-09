@@ -7,6 +7,7 @@ import {
 	formatTimer,
 } from '../utils/timerFunctions';
 import DropdownButton from '../components/DropdownButton';
+import EditScore from '../components/EditScore';
 import imageClick from '../utils/imageClick';
 import gameReset from '../utils/gameReset';
 import { useLoaderData } from 'react-router-dom';
@@ -24,6 +25,10 @@ export default function GameBoard({ url, index }) {
 
 	const data = useLoaderData();
 
+	// modal
+	const dialog = useRef(null);
+	const [isModal, setIsModal] = useState(false);
+
 	// timer state
 
 	const [isRunning, setIsRunning] = useState(false);
@@ -38,6 +43,7 @@ export default function GameBoard({ url, index }) {
 		setCircleCoord(data.data[index].circle_coord);
 		setSquareCoord(data.data[index].square_coord);
 		setStarCoord(data.data[index].star_coord);
+		dialog.current = document.querySelector('dialog');
 	}, []);
 
 	return (
@@ -145,9 +151,27 @@ export default function GameBoard({ url, index }) {
 							Game Reset
 						</button>
 						<button onClick={() => stopTimer({ setIsRunning })}>stop</button>
-						<button onClick={() => formatTimer({ elapsedTime })}>time?</button>
+						<button
+							onClick={(e) => {
+								e.preventDefault();
+								dialog.current.showModal();
+								setIsModal(true);
+							}}
+						>
+							Save score
+						</button>
 					</div>
 				</div>
+				<dialog>
+					<EditScore
+						elapsedTime={elapsedTime}
+						isModal={isModal}
+						setIsModal={setIsModal}
+					/>
+					<form method="dialog">
+						<button>OK</button>
+					</form>
+				</dialog>
 			</div>
 		</>
 	);
