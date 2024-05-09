@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 export default function SelectionTile({ imageUrl, location, time }) {
 	const formatted = time
 		.sort((a, b) => {
-			return a.score - b.score;
+			return a.elapsedTime - b.elapsedTime;
 		})
 		.map((elem) => (
-			<li key={elem.name + elem.score}>
-				{elem.name} - {elem.score}
+			<li key={elem.userName + elem.elapsedTime}>
+				{elem.userName} - {elem.formattedTime}
 			</li>
 		));
 

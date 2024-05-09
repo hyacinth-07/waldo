@@ -1,6 +1,7 @@
 // UTILS
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import loadData from './utils/loadData';
+import scoreAction from './utils/scoreAction';
 // ROUTES
 import Root from './routes/Root';
 import ErrorPage from './routes/ErrorPage';
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
 				path: 'game/gameOne',
 				element: <GameBoard url={image1} index={0} />,
 				loader: loadData,
+				action: scoreAction,
 			},
 			{
 				path: 'game/gameTwo',

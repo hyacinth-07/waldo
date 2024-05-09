@@ -25,9 +25,17 @@
 			"found": false
 		},
 		"time": [
-			{ "name": "Johnny", "score": 45 },
-			{ "name": "Franco", "score": 22 },
-			{ "name": "Antonio", "score": 73 }
+			{
+				"userName": "Johnny",
+				"formattedTime": "00:03:17",
+				"elapsedTime": 3175
+			},
+			{
+				"userName": "Antonio",
+				"formattedTime": "00:06:17",
+				"elapsedTime": 6177
+			},
+			{ "userName": "Carlos", "formattedTime": "00:05:03", "elapsedTime": 5035 }
 		]
 	},
 	{
